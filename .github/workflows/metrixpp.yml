@@ -59,11 +59,11 @@ jobs:
       - name: 15 plus complexity regions trending up
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
         continue-on-error: true
-      - name: 15 plus complexity regions trending up
-        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
+      - name: 15 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=touched
         continue-on-error: true
-      - name: 20 plus complexity regions touched
-        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=touched
+      - name: 20 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=trend
         continue-on-error: true
       - name: 20 plus complexity regions touched
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=touched
