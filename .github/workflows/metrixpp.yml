@@ -56,11 +56,29 @@ jobs:
       - name: 10 plus complexity regions touched
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:10 --warn-mode=touched
         continue-on-error: true
+      - name: 15 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
+        continue-on-error: true
+      - name: 15 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
+        continue-on-error: true
+      - name: 20 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=touched
+        continue-on-error: true
+      - name: 20 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=touched
+        continue-on-error: true
       - name: 30 plus complexity regions trending up
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:30 --warn-mode=trend
         continue-on-error: true
       - name: 30 plus complexity regions touched
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:30 --warn-mode=touched
+        continue-on-error: true
+      - name: 40 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:40 --warn-mode=trend
+        continue-on-error: true
+      - name: 40 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:40 --warn-mode=touched
         continue-on-error: true
       - name: 50 plus complexity regions trending up
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:50 --warn-mode=trend
@@ -68,11 +86,29 @@ jobs:
       - name: 50 plus complexity regions touched
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:50 --warn-mode=touched
         continue-on-error: true
+      - name: 60 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:60 --warn-mode=trend
+        continue-on-error: true
+      - name: 60 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:60 --warn-mode=touched
+        continue-on-error: true
+      - name: 70 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:70 --warn-mode=trend
+        continue-on-error: true
+      - name: 70 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:70 --warn-mode=touched
+        continue-on-error: true        
       - name: 75 plus complexity regions trending up
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:75 --warn-mode=trend
         continue-on-error: true
       - name: 75 plus complexity regions touched
         run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:75 --warn-mode=touched
+        continue-on-error: true
+      - name: 80 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:80 --warn-mode=trend
+        continue-on-error: true
+      - name: 80 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:80 --warn-mode=touched
         continue-on-error: true
       - name: Complexity after summary
         run: metrix++ view --db-file=after.pr.db
