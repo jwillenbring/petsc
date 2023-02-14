@@ -1,0 +1,122 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# Metrix++ is a tool to collect and analyze code metrics.
+# More details at https://metrixplusplus.github.io/metrixplusplus/
+
+# Complexity thresholds can be customized per project
+# The defaults are based on analysis from 
+# Watson, A. & McCabe, T., (NIST 500-235), 
+# Structured Testing: a testing methodology using the cyclomatic complexity metric, 
+# Special Publication 500-235, National Institute of Standards and Technology, Sept. 1996
+# A threshold could be chosen from above to set a hard limit on complexity. For example, if a region of complexity 75 or more is trending up, 
+# the GitHub Action could be set to continue-on-error: false
+
+# To-do: save output to GitHub
+# To-do: consider proving detail at a more granular (commit) level
+
+name: Metrix++
+
+on:
+  pull_request:
+#    branches: [ $default-branch, $protected-branches ]
+#  pull_request:
+#    # The branches below must be a subset of the branches above
+#    branches: [ $default-branch ]
+# Could run on a schedule to capture larger trends
+#  schedule:
+#    - cron: $cron-weekly
+
+jobs:
+  metrixpp:
+    name: Run Metrix++
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+        # fetch all commits so we can go back to the beginning of the PR and measure change
+          fetch-depth: 0
+      - name: Install Metrix++
+        run: pip install metrixpp
+      - name: Run Metrix++ after PR
+        run: metrix++ collect --std.code.complexity.cyclomatic --db-file after.pr.db .
+      - name: Checkout PR base sha
+        run:  git checkout ${{ github.event.pull_request.base.sha }}
+      - name: Run Metrix++ before PR
+        run: metrix++ collect --std.code.complexity.cyclomatic --db-file before.pr.db .
+      - name: 10 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:10 --warn-mode=trend
+        continue-on-error: true
+      - name: 10 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:10 --warn-mode=touched
+        continue-on-error: true
+      - name: 15 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
+        continue-on-error: true
+      - name: 15 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=touched
+        continue-on-error: true
+      - name: 20 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=trend
+        continue-on-error: true
+      - name: 20 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:20 --warn-mode=touched
+        continue-on-error: true
+      - name: 30 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:30 --warn-mode=trend
+        continue-on-error: true
+      - name: 30 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:30 --warn-mode=touched
+        continue-on-error: true
+      - name: 40 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:40 --warn-mode=trend
+        continue-on-error: true
+      - name: 40 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:40 --warn-mode=touched
+        continue-on-error: true
+      - name: 50 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:50 --warn-mode=trend
+        continue-on-error: true
+      - name: 50 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:50 --warn-mode=touched
+        continue-on-error: true
+      - name: 60 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:60 --warn-mode=trend
+        continue-on-error: true
+      - name: 60 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:60 --warn-mode=touched
+        continue-on-error: true
+      - name: 70 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:70 --warn-mode=trend
+        continue-on-error: true
+      - name: 70 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:70 --warn-mode=touched
+        continue-on-error: true        
+      - name: 75 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:75 --warn-mode=trend
+        continue-on-error: true
+      - name: 75 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:75 --warn-mode=touched
+        continue-on-error: true
+      - name: 80 plus complexity regions trending up
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:80 --warn-mode=trend
+        continue-on-error: true
+      - name: 80 plus complexity regions touched
+        run: metrix++ limit --db-file=after.pr.db --db-file-prev=before.pr.db --max-limit=std.code.complexity:cyclomatic:80 --warn-mode=touched
+        continue-on-error: true
+      - name: Complexity after summary
+        run: metrix++ view --db-file=after.pr.db
+      - name: Complexity before summary
+        run: metrix++ view --db-file=before.pr.db
+#need to change this to text
+#      - name: Upload output to GitHub
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: metrixpp-output.sarif
+#          wait-for-processing: true
